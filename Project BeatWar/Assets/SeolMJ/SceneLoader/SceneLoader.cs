@@ -273,7 +273,14 @@ namespace SeolMJ
                     Active.Remove(scene);
 
                     currentOperation = SceneManager.UnloadSceneAsync(scene);
-                    await currentOperation;
+                    try
+                    {
+                        await currentOperation;
+                    }
+                    catch (Exception e)
+                    {
+                        SLogger.LogError(e);
+                    }
 #if UNITY_EDITOR
                     if (!inited)
                     {
@@ -288,7 +295,14 @@ namespace SeolMJ
 
                 currentOperation = SceneManager.LoadSceneAsync(Queue[0], LoadSceneMode.Single);
                 currentOperation.allowSceneActivation = AutoActivate;
-                await currentOperation;
+                try
+                {
+                    await currentOperation;
+                }
+                catch (Exception e)
+                {
+                    SLogger.LogError(e);
+                }
 #if UNITY_EDITOR
                 if (!inited)
                 {
@@ -309,7 +323,14 @@ namespace SeolMJ
 
                     currentOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
                     currentOperation.allowSceneActivation = AutoActivate;
-                    await currentOperation;
+                    try
+                    {
+                        await currentOperation;
+                    }
+                    catch (Exception e)
+                    {
+                        SLogger.LogError(e);
+                    }
 #if UNITY_EDITOR
                     if (!inited)
                     {
