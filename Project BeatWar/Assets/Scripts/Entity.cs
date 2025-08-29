@@ -45,6 +45,8 @@ public abstract class Entity : Scrolled
         Entity target = null;
         foreach (Entity entity in Entities)
         {
+            if (entity == null) continue;
+            
             if (entity.Lane == lane && entity.PositionY < minY && entity.Health >= health)
             {
                 minY = entity.PositionY;
