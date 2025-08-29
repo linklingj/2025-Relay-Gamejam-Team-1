@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using SeolMJ;
 using UnityEngine;
 
@@ -40,17 +42,34 @@ public class StageManager : MonoBehaviour
 
     public bool Started { get; private set; } = false;
     public bool Ended { get; private set; } = false;
+    
+    private bool _canEscape = false;
 
     public void Begin()
     {
         Started = true;
+        Ended = false;
+        _canEscape = false;
         WeaponManager.Instance.Begin();
+        Time.timeScale = 1f;
     }
 
     public void End()
     {
         Ended = true;
         Time.timeScale = 0f;
+        
+        // 비트 흐름과 오디오를 함께 정지
+        BeatManager.Instance.StopBeatFlow();
+        
+        StartCoroutine(AllowToEscape());
+    }
+
+    private IEnumerator AllowToEscape()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        
+        _canEscape = true;
     }
 
     void Update()
@@ -62,6 +81,11 @@ public class StageManager : MonoBehaviour
                 PlayerInputs.Disable();
                 SceneLoader.Load(ScenePresets.MainMenu);
             }
+        }
+        
+        if (BeatManager.Instance.CurrentBeat >= Track.GetFinishBeat() && !Ended)
+        {
+            End();
         }
     }
 }

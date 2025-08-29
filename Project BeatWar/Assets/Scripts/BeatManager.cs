@@ -14,8 +14,14 @@ public class BeatManager : MonoBehaviour
 
     public float BPS => StageManager.Track.BPS;
 
+    // 비트 흐름 중지 상태 관리
+    bool _stopped;
+    double _stoppedElapsedSec;
+
     // ⬇️ 매 프레임 Calibration.Offset을 반영 (실시간 적용)
-    public double ElapsedSec => AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
+    public double ElapsedSec => _stopped
+        ? _stoppedElapsedSec
+        : AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
     public float Beat => (float)(ElapsedSec * BPS);
     
     public int CurrentBeat => Mathf.FloorToInt(Beat);
@@ -43,6 +49,9 @@ public class BeatManager : MonoBehaviour
     {
         public override void OnBegin(BeatManager owner)
         {
+            // 흐름 재개를 위해 초기화
+            owner._stopped = false;
+
             // ⬇️ 모든 '절대 시간'은 DSP 기준으로 고정
             var dspNow = AudioSettings.dspTime;
 
@@ -95,6 +104,15 @@ public class BeatManager : MonoBehaviour
         {
             owner.Source.Stop();
         }
+    }
+
+    // 비트의 흐름을 즉시 중지하고 현재 시각을 고정
+    public void StopBeatFlow()
+    {
+        if (_stopped) return;
+        _stoppedElapsedSec = AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
+        _stopped = true;
+        End();
     }
 
     public void End() => _stateMachine.Set(null);

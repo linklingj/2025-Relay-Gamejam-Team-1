@@ -128,7 +128,7 @@ namespace SeolMJ
 
         public static void Load(IEnumerable<int> scenes, Params param = default)
         {
-            if (scenes == null || scenes.Count() == 0)
+            if (scenes == null || !scenes.Any())
             {
                 return;
             }

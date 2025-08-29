@@ -97,6 +97,12 @@ public class Track : ScriptableObject
     
     [field: SerializeField]
     public float PreviewStart { get; private set; }
+
+    public int GetFinishBeat()
+    {
+        int beatCnt = Chart.Length / enemiesPerSpawn;
+        return patternStartBeat + beatCnt * Interval;
+    }
     
     
     #endregion
