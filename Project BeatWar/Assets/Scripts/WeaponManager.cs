@@ -59,6 +59,8 @@ public class WeaponManager : MonoBehaviour
         }
         foreach (var weapon in current)
         {
+            if (weapon == null) continue;
+            
             weapon.Disable();
             Return(weapon);
         }
