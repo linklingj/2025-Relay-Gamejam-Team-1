@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
     public int MaxHealth { get; private set; }
 
     public int Health { get; private set; }
+    
+    public CinemachineImpulseSource impulseSource;
 
     public ParticleEmitCaller OnHealCaller { get; private set; }
 
@@ -30,6 +33,7 @@ public class Player : MonoBehaviour
         {
             StageManager.Instance.End();
         }
+        impulseSource.GenerateImpulse();
     }
 
     public void Heal(int amount)

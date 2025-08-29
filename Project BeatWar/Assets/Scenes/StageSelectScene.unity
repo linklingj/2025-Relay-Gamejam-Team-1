@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 131439593}
   - component: {fileID: 131439592}
   - component: {fileID: 131439591}
+  - component: {fileID: 131439594}
   m_Layer: 5
   m_Name: Play BTN
   m_TagString: Untagged
@@ -461,7 +462,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 131439592}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 131439594}
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &131439592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +513,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131439589}
   m_CullTransparentMesh: 1
+--- !u!114 &131439594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131439589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a543456bbd40349b32af4d1905c4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scenes: 03000000
 --- !u!1 &159431899
 GameObject:
   m_ObjectHideFlags: 0
