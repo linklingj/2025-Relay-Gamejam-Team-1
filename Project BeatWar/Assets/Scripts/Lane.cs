@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Lane : MonoBehaviour
 {
@@ -6,6 +7,10 @@ public class Lane : MonoBehaviour
     public int Index { get; private set; }
 
     public Weapon Weapon { get; private set; }
+    [FormerlySerializedAs("spriteAnimator")] public CharacterAnimator characterAnimator;
+    
+    [SerializeField] ParticleEmitCaller onHitCaller;
+    [SerializeField] ParticleEmitCaller onMissCaller;
 
     public void Init(int index)
     {
@@ -15,6 +20,8 @@ public class Lane : MonoBehaviour
 
     public void Refresh(Pattern pattern)
     {
+        characterAnimator.ShootAnimation();
+        onHitCaller.EmitAt(transform.position);
         Pattern = pattern;
 
         if (Weapon != null)
@@ -22,6 +29,11 @@ public class Lane : MonoBehaviour
             WeaponManager.Instance.Return(Weapon);
         }
         Weapon = WeaponManager.Instance.Borrow(pattern, this);
+    }
+
+    public void Miss()
+    {
+        onMissCaller.EmitAt(transform.position);
     }
 
     public void Clear()

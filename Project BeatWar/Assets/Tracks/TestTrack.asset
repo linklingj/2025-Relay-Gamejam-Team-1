@@ -15,9 +15,9 @@ MonoBehaviour:
   <Name>k__BackingField: Simple Test Beat 03
   <BPM>k__BackingField: 60
   <Delay>k__BackingField: 4
-  <Offset>k__BackingField: 0
+  <Offset>k__BackingField: -0.1
   <Chart>k__BackingField: 010101010101010101010101010101410041004100414040004100410041001100410041004100410041004100410011004100410041004100410041004100410041004110111110101011451545154515511045104510451045104510451045
   <Clip>k__BackingField: {fileID: 8300000, guid: a82cd92de04443e47b9218c07ef0f7c0, type: 3}
-  <Lanes>k__BackingField: 24
+  <Lanes>k__BackingField: 60
   <SpawnRateBase>k__BackingField: 0.5
   <SpawnRateAddition>k__BackingField: 0.005

@@ -17,6 +17,7 @@ public class Enemy : Entity
     protected override void Update()
     {
         base.Update();
+        // 적 못잡았을 때 검사
         if (transform.position.y <= 0f)
         {
             Disable();

@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        // miss clicked
+                        lane.Miss();
                     }
                 }
             }

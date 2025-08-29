@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2908789382841495078}
+  - component: {fileID: 9050953107245893263}
   - component: {fileID: 7322090808925141731}
+  - component: {fileID: 7492982244734061497}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -26,12 +28,27 @@ Transform:
   m_GameObject: {fileID: 4409946647606286674}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.54, y: 0.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6553387608452761824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9050953107245893263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409946647606286674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57062bb3f32e44dd08a4c5cc7b77aff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idle: {fileID: 2410635517405602792, guid: 540f1510a495d467c88b55b6f353ffb7, type: 3}
+  shoot: {fileID: -7943720702334105097, guid: 050f1eb05b6c34635b794efabd428f6a, type: 3}
+  animationDuration: 0.2
 --- !u!212 &7322090808925141731
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,8 +93,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.1254902}
+  m_Sprite: {fileID: 2410635517405602792, guid: 540f1510a495d467c88b55b6f353ffb7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,6 +104,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7492982244734061497
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409946647606286674}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7e126dfcd2eb4af99a57eac44f799ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8841077594366667989
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +136,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6553387608452761824}
   - component: {fileID: 687412968709942995}
+  - component: {fileID: 71089014747777197}
+  - component: {fileID: 2794221229428935302}
   m_Layer: 0
   m_Name: Lane
   m_TagString: Untagged
@@ -133,6 +174,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7987034644216be429d723c80f4cceb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAnimator: {fileID: 9050953107245893263}
+  onHitCaller: {fileID: 71089014747777197}
+  onMissCaller: {fileID: 2794221229428935302}
+--- !u!114 &71089014747777197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841077594366667989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09390c586d4c60d4ba98260540f5270d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitterName: Explosion
+  position: {x: 0, y: 0}
+  angle: 0
+  scale: {x: 7, y: 7}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  lifetime: 1
+--- !u!114 &2794221229428935302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841077594366667989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09390c586d4c60d4ba98260540f5270d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitterName: ExplosionMiss
+  position: {x: 0, y: 0}
+  angle: 0
+  scale: {x: 3, y: 3}
+  color: {r: 1, g: 1, b: 1, a: 0}
+  lifetime: 0.6
 --- !u!1001 &4783397998246483089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,11 +227,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4231906891293939049, guid: 90e0e2bb2e728104eacdb1a096ab7ca2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.037
       objectReference: {fileID: 0}
     - target: {fileID: 4231906891293939049, guid: 90e0e2bb2e728104eacdb1a096ab7ca2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.215
       objectReference: {fileID: 0}
     - target: {fileID: 4231906891293939049, guid: 90e0e2bb2e728104eacdb1a096ab7ca2, type: 3}
       propertyPath: m_LocalPosition.z
