@@ -177,6 +177,7 @@ MonoBehaviour:
   characterAnimator: {fileID: 9050953107245893263}
   onHitCaller: {fileID: 71089014747777197}
   onMissCaller: {fileID: 2794221229428935302}
+  missRandomRange: 0.5
 --- !u!114 &71089014747777197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   emitterName: Explosion
   position: {x: 0, y: 0}
   angle: 0
-  scale: {x: 7, y: 7}
+  scale: {x: 5, y: 5}
   color: {r: 1, g: 1, b: 1, a: 1}
   lifetime: 1
 --- !u!114 &2794221229428935302
@@ -210,7 +211,7 @@ MonoBehaviour:
   emitterName: ExplosionMiss
   position: {x: 0, y: 0}
   angle: 0
-  scale: {x: 3, y: 3}
+  scale: {x: 5, y: 5}
   color: {r: 1, g: 1, b: 1, a: 0}
   lifetime: 0.6
 --- !u!1001 &4783397998246483089

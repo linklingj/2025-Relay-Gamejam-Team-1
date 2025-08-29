@@ -1,3 +1,4 @@
+using SeolMJ;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,10 +8,11 @@ public class Lane : MonoBehaviour
     public int Index { get; private set; }
 
     public Weapon Weapon { get; private set; }
-    [FormerlySerializedAs("spriteAnimator")] public CharacterAnimator characterAnimator;
+    public CharacterAnimator characterAnimator;
     
     [SerializeField] ParticleEmitCaller onHitCaller;
     [SerializeField] ParticleEmitCaller onMissCaller;
+    public float missRandomRange = 0.5f;
 
     public void Init(int index)
     {
@@ -21,19 +23,22 @@ public class Lane : MonoBehaviour
     public void Refresh(Pattern pattern)
     {
         characterAnimator.ShootAnimation();
-        onHitCaller.EmitAt(transform.position);
+        
+        var entity = Entity.Scan(Index, 0);
+        if(entity != null) onHitCaller.EmitAt( entity.transform.position);
+        
         Pattern = pattern;
 
         if (Weapon != null)
         {
             WeaponManager.Instance.Return(Weapon);
         }
-        Weapon = WeaponManager.Instance.Borrow(pattern, this);
+        Weapon = WeaponManager.Instance.Borrow(pattern, this);  
     }
 
     public void Miss()
     {
-        onMissCaller.EmitAt(transform.position);
+        onMissCaller.EmitAt(new Vector2(transform.position.x + Random.Range(-missRandomRange, missRandomRange), Random.Range(-missRandomRange, missRandomRange)));
     }
 
     public void Clear()

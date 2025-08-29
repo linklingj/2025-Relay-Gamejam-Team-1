@@ -136,6 +136,12 @@ MonoBehaviour:
   Beat: 0
   <Health>k__BackingField: 4
   <Weight>k__BackingField: 0.125
+  spawnPoint:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  subEnemyPrefab: {fileID: 6851784293335870338, guid: f33bc54e6e02142c5b5fb5a829c37b8e, type: 3}
 --- !u!1001 &3568923240154380010
 PrefabInstance:
   m_ObjectHideFlags: 0

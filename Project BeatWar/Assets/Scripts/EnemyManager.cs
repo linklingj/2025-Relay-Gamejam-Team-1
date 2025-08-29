@@ -49,8 +49,8 @@ public class EnemyManager : MonoBehaviour
             && BeatManager.Instance.CurrentBeat >= currentBeat + interval)
         {
             currentBeat = BeatManager.Instance.CurrentBeat;
-            //SpawnEnemies();
-            SpawnRandomEnemies();
+            SpawnEnemies();
+            //SpawnRandomEnemies();
         }
     }
 
@@ -85,8 +85,10 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    //기존에 health에 따라 다른 적 불러옴. 지금은 강제로 첫번째 적 (health=1)만 불러오게 해놓음
     Enemy FindEnemyOf(int health)
     {
+        health = 1;
         foreach (Enemy enemy in enemies)
         {
             if (enemy.Health == health)

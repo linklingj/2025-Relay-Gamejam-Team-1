@@ -24,6 +24,6 @@ public abstract class Scrolled : MonoBehaviour
 
     protected virtual void Update()
     {
-        PositionY = (Beat - BeatManager.Instance.CurrentBeat - BeatManager.Instance.CurrentSubBeat / (float)BeatUtils.SUB_BEAT_LENGTH) * StageManager.Instance.ScrollSpeed;
+        // PositionY = (Beat - BeatManager.Instance.CurrentBeat - BeatManager.Instance.CurrentSubBeat / (float)BeatUtils.SUB_BEAT_LENGTH) * StageManager.Instance.ScrollSpeed;
     }
 }

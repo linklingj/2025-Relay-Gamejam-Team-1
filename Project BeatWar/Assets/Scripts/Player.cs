@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
                     int subBeat = BeatManager.Instance.InputSubBeat;
                     if (!lane.Pattern.HasPattern(subBeat))
                     {
+                        var entity = Entity.Scan(i, 0);
                         lane.Refresh(lane.Pattern
                             | subBeat.ToPattern());
                     }
