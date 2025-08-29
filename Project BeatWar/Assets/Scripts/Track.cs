@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "Chart", menuName = "Chart")]
 public class Track : ScriptableObject
@@ -75,4 +76,23 @@ public class Track : ScriptableObject
     /// <param name="beat">current beat (corresponds to elapsed time)</param>
     /// <returns>0~1</returns>
     public float SpawnRate(float beat) => System.MathF.Tanh(SpawnRateBase + SpawnRateAddition * beat);
+    
+    
+    #region Meta Data
+    [field: FormerlySerializedAs("<Author>k__BackingField")]
+    [field: Header("Meta Data")]
+    [field: SerializeField]
+    public string Artist { get; private set; }
+    
+    [field: SerializeField]
+    public int Difficulty { get; private set; }
+    
+    [field: SerializeField]
+    public Sprite Cover { get; private set; }
+    
+    [field: SerializeField]
+    public float PreviewStart { get; private set; }
+    
+    
+    #endregion
 }

@@ -16022,6 +16022,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b12e9e7979a44ec08bfd80fe9b93d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minY: 0
+  maxY: 0
+  minX: 0
+  maxX: 0
+  lerpSpeed: 0
 --- !u!1 &852514584
 GameObject:
   m_ObjectHideFlags: 0
@@ -16321,7 +16326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4356691571c34474892182e152befe4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Track: {fileID: 11400000, guid: 89d491f97621d944c808108c59d53656, type: 2}
+  CurSelected: {fileID: 11400000, guid: 30220c526bfef9e49b4ce3a76715aafc, type: 2}
 --- !u!114 &976710495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16611,6 +16616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c311fa200c96d408aab261164e044d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  easeDuration: 0.3
+  useUnscaledTime: 0
 --- !u!1 &1209548135
 GameObject:
   m_ObjectHideFlags: 0
