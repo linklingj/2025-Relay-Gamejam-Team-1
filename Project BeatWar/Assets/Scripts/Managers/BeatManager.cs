@@ -107,12 +107,12 @@ public class BeatManager : MonoBehaviour
     }
 
     // 비트의 흐름을 즉시 중지하고 현재 시각을 고정
-    public void StopBeatFlow()
+    public void StopBeatFlow(bool stopaudio = true)
     {
         if (_stopped) return;
         _stoppedElapsedSec = AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
         _stopped = true;
-        End();
+        if(stopaudio) End();
     }
 
     public void End() => _stateMachine.Set(null);

@@ -24,14 +24,9 @@ public static class ScoreSystem
     {
         CurrentScore = 0;
         currentTrack = track;
-        if (track != null)
-        {
-            HighScore = track.HighScore;
-        }
-        else
-        {
-            HighScore = 0;
-        }
+        
+        // try to get int high score from PlayerPrefs
+        HighScore = PlayerPrefs.GetInt("HighScore_" + track.name, 0);
     }
 
     public static void AddScore(Judge judge)
@@ -55,12 +50,20 @@ public static class ScoreSystem
             HighScore = CurrentScore;
             if (currentTrack != null)
             {
-                currentTrack.HighScore = HighScore;
-                // Optionally save the high score to persistent storage here
-                
                 PlayerPrefs.SetInt("HighScore_" + currentTrack.name, HighScore);
             }
         }
     }
+    
+    public static float GetHighScore(Track track)
+    {
+        return PlayerPrefs.GetInt("HighScore_" + track.name, 0);
+    }
+    
+    public static float GetHighScore(string trackName)
+    {
+        return PlayerPrefs.GetInt("HighScore_" + trackName, 0);
+    }
+    
     
 }

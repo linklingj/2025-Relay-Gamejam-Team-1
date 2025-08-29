@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SeolMJ;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StageManager : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class StageManager : MonoBehaviour
     public bool Ended { get; private set; } = false;
     
     private bool _canEscape = false;
+    
+    public event UnityAction<bool> OnStageEnd; // bool: clear or not
 
     public void Begin()
     {
@@ -57,20 +60,21 @@ public class StageManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void End()
+    public void End(bool clear)
     {
         Ended = true;
         Time.timeScale = 0f;
         
         // 비트 흐름과 오디오를 함께 정지
-        BeatManager.Instance.StopBeatFlow();
+        BeatManager.Instance.StopBeatFlow(!clear);
         
         StartCoroutine(AllowToEscape());
+        OnStageEnd?.Invoke(clear);
     }
 
     private IEnumerator AllowToEscape()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         
         _canEscape = true;
     }
@@ -88,7 +92,7 @@ public class StageManager : MonoBehaviour
         
         if (BeatManager.Instance.CurrentBeat >= Track.GetFinishBeat() && !Ended)
         {
-            End();
+            End(clear: true);
         }
     }
 }

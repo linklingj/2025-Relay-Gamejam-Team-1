@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
 
     void SetEnemyWeights()
     {
-        enemyWeights = new();
+        enemyWeights = new WeightedRandom();
         for (int i = 0; i < enemies.Length; i++)
         {
             enemyWeights.Register(i, enemies[i].Weight);

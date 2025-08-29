@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         Health -= damage;
         if (Health <= 0)
         {
-            StageManager.Instance.End();
+            StageManager.Instance.End(false);
         }
         impulseSource.GenerateImpulse();
     }
