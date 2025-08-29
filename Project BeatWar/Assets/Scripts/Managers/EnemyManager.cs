@@ -49,15 +49,13 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void Start()
+    public void Setup(Track track)
     {
         // setup interval and enemiesPerSpawn
-        Track currentTrack = StageManager.Track;
-
-        interval = currentTrack.Interval;
-        enemiesPerSpawn = currentTrack.enemiesPerSpawn;
-        randomLane = currentTrack.randomizeLanes;
-        _currentBeat = currentTrack.patternStartBeat - interval;
+        interval = track.Interval;
+        enemiesPerSpawn = track.enemiesPerSpawn;
+        randomLane = track.randomizeLanes;
+        _currentBeat = track.patternStartBeat - interval;
     }
 
     void Update()

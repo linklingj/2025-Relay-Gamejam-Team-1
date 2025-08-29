@@ -97,6 +97,9 @@ public class Track : ScriptableObject
     
     [field: SerializeField]
     public float PreviewStart { get; private set; }
+    
+    [field: SerializeField]
+    public int HighScore { get; set; }
 
     public int GetFinishBeat()
     {

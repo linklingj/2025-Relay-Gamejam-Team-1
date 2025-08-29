@@ -51,6 +51,9 @@ public class StageManager : MonoBehaviour
         Ended = false;
         _canEscape = false;
         WeaponManager.Instance.Begin();
+        ScoreSystem.Reset(track: Track);
+        EnemyManager.Instance.Setup(track: Track);
+        
         Time.timeScale = 1f;
     }
 

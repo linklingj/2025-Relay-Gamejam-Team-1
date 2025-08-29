@@ -53,7 +53,9 @@ public class Weapon : MonoBehaviour
             {
                 // Break!
                 Player.Instance.Heal(Damage);
+                ScoreSystem.AddScore(ScoreSystem.Judge.Perfect);
             }
+            else ScoreSystem.AddScore(ScoreSystem.Judge.Good);
             
             onAttack.Invoke(target);
             onAttackPosition.Invoke(target.transform.position);
