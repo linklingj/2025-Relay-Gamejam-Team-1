@@ -43,7 +43,12 @@ public class BeatManager : MonoBehaviour
             owner.Timer.Set(delay);
             owner.Timer.SetStartTime(Time.time + delay);
             owner.Source.clip = StageManager.Track.Clip;
-            owner.Source.PlayDelayed(Mathf.Repeat(delay - Calibration.Offset + StageManager.Track.Offset, StageManager.Track.Clip.length));
+            
+            float playDelay = delay - Calibration.Offset + StageManager.Track.Offset * StageManager.Track.SPB;
+            if (playDelay < 0f) playDelay = 0f; // 음
+            owner.Source.PlayDelayed(Mathf.Repeat(playDelay, StageManager.Track.Clip.length));
+            
+            SLogger.Log($"Track Started: Delay={delay}, Offset={StageManager.Track.Offset}, ClipLength={owner.Source.clip.length}");
         }
 
         public override void OnUpdate(BeatManager owner)
