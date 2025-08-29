@@ -22,7 +22,8 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     UnityEvent<Vector2> onAttackPosition;
 
-    public Lane Lane { get; private set; }
+    [SerializeField] private Lane _lane;
+    public Lane Lane { get => _lane; private set => _lane = value; }
     public int Beat { get; private set; }
 
     public void Enable(Pattern pattern, Lane lane)
