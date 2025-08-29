@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [System.Flags]
@@ -40,6 +41,24 @@ public static class LaneUtils
         return count;
     }
 
+    public static int[] GetRange(this Lanes lanes, int size)
+    {
+        int count = lanes.Count();
+        if (size > count) size = count;
+        
+        if (count == 0) return Array.Empty<int>();
+        
+        int[] result = new int[size];
+        for (int i = 0, j = 0; i < 8 && j < size; i++)
+        {
+            if (lanes.HasLane(i))
+            {
+                result[j++] = i;
+            }
+        }
+        return result;
+    }
+
     public static int Random(this Lanes lanes)
     {
         int count = lanes.Count();
@@ -56,5 +75,37 @@ public static class LaneUtils
             }
         }
         return 0;
+    }
+
+    // 중복되지 않는 랜덤한 lane 인덱스 배열 반환
+    public static int[] Randoms(this Lanes lanes, int cnt)
+    {
+        int count = lanes.Count();
+        if (count == 0 || cnt <= 0) return Array.Empty<int>();
+        if (cnt > count) cnt = count;
+        int[] result = new int[cnt];
+        bool[] chosen = new bool[8];
+        for (int i = 0; i < cnt; i++)
+        {
+            int random;
+            do
+            {
+                random = UnityEngine.Random.Range(0, count);
+            } while (chosen[random]);
+            
+            chosen[random] = true;
+            for (int j = 0, k = 0; j < 8; j++)
+            {
+                if (lanes.HasLane(j))
+                {
+                    if (k++ == random)
+                    {
+                        result[i] = j;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

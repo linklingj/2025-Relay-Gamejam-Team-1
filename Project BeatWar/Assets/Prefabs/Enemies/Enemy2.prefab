@@ -141,7 +141,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  subEnemyPrefab: {fileID: 6851784293335870338, guid: f33bc54e6e02142c5b5fb5a829c37b8e, type: 3}
+  subEnemyPrefab: {fileID: 6851784293335870338, guid: 4e2b08b497549644b868f08b14c5c565, type: 3}
 --- !u!1001 &2145064270839700470
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,7 +10,15 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField]
+    // 몹을 소환하는 간격
     int interval;
+    
+    [SerializeField]
+    // 한 번에 소환하는 몹의 수
+    int enemiesPerSpawn = 1;
+    
+    [SerializeField]
+    bool randomLane = false;
 
     [Header("Resources")]
     [SerializeField]
@@ -21,12 +29,15 @@ public class EnemyManager : MonoBehaviour
     WeightedRandom enemyWeights;
 
     int currentBeat = 0;
+    private int cursor = 0;
 
     void Awake()
     {
         Instance = this;
         OnHitCaller = GetComponent<ParticleEmitCaller>();
         SetEnemyWeights();
+        cursor = 0;
+        
     }
 
     void SetEnemyWeights()
@@ -38,9 +49,14 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void Begin()
+    public void Start()
     {
-        currentBeat = BeatManager.Instance.CurrentBeat;
+        // setup interval and enemiesPerSpawn
+        Track currentTrack = StageManager.Track;
+
+        interval = currentTrack.Interval;
+        enemiesPerSpawn = currentTrack.enemiesPerSpawn;
+        randomLane = currentTrack.randomizeLanes;
     }
 
     void Update()
@@ -49,26 +65,45 @@ public class EnemyManager : MonoBehaviour
             && BeatManager.Instance.CurrentBeat >= currentBeat + interval)
         {
             currentBeat = BeatManager.Instance.CurrentBeat;
-            //SpawnEnemies();
-            SpawnRandomEnemies();
+            SpawnEnemies();
+            //SpawnRandomEnemies();
         }
     }
 
     void SpawnEnemies()
     {
-        int cursor = currentBeat + 1;
+        SLogger.Log($"Spawning enemies at beat {currentBeat}");
         if (cursor >= StageManager.Track.Chart.Length)
         {
             return;
         }
-        Pattern pattern = StageManager.Track.Chart[cursor];
-        if (!WeaponManager.Instance.PatternTable.TryGetValue(pattern.Count(), out Weapon weapon))
+        
+        int[] lanes = randomLane ?
+            StageManager.Track.Lanes.Randoms(enemiesPerSpawn) :
+            StageManager.Track.Lanes.GetRange(enemiesPerSpawn);
+        
+        for (int i = 0; i < enemiesPerSpawn; i++)
         {
-            return;
+            if (cursor >= StageManager.Track.Chart.Length)
+            {
+                SLogger.Log("No more patterns to spawn");
+                return;
+            }
+            
+            Pattern pattern = StageManager.Track.Chart[cursor++];
+            SLogger.Log($"Spawning {cursor}enemy at lane {lanes[i]}");
+            if (!WeaponManager.Instance.PatternTable.TryGetValue(pattern.Count(), out Weapon weapon))
+            {
+                SLogger.LogError($"No weapon for pattern of length {pattern.Count()}");
+                continue;
+            }
+            Enemy enemy = Borrow(FindEnemyOf(weapon.Damage));
+            
+            enemy.SetPattern(pattern);
+            
+            StageManager.Instance.Locate(enemy, lanes[i]);
         }
-        Enemy enemy = Borrow(FindEnemyOf(weapon.Damage));
-        // enemy.SetPattern(pattern);
-        StageManager.Instance.Locate(enemy, StageManager.Track.Lanes.Random());
+        
     }
 
     void SpawnRandomEnemies()

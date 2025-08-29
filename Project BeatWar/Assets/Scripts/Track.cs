@@ -39,7 +39,7 @@ public class Track : ScriptableObject
     [field: SerializeField]
     public float Offset { get; private set; }
 
-    [field: SerializeField]
+    [field: SerializeField, EnumButtons]
     public Pattern[] Chart { get; set; }
 
     /// <summary>
@@ -52,7 +52,6 @@ public class Track : ScriptableObject
     public Lanes Lanes { get; private set; }
 
     [field: Header("Enemy Settings")]
-
     /// <summary>
     /// 0~1
     /// </summary>
@@ -64,6 +63,11 @@ public class Track : ScriptableObject
     /// </summary>
     [field: SerializeField]
     public float SpawnRateAddition { get; private set; }
+    
+    [field: Header("Chart Settings")]
+    public int Interval = 2; // in beats
+    public int enemiesPerSpawn = 1; // enemies spawned per spawn event
+    public bool randomizeLanes = true;
 
     /// <summary>
     /// SpawnRate calculated with Tanh(SpawnRateBase + (SpawnRateAddition * CurrentBeat));

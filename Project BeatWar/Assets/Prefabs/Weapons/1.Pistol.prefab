@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9183845539734442363}
   - component: {fileID: 2843424042813973849}
-  - component: {fileID: 9074935858946550499}
+  - component: {fileID: 6682249251337182717}
   m_Layer: 0
-  m_Name: Rpg
+  m_Name: 1.Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3066554430608748196}
-  - {fileID: 381119687985136991}
+  - {fileID: 6344022587901213656}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2843424042813973849
@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e05b01ef9383340901c56aab0edf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 3
+  <Damage>k__BackingField: 1
   onAttack:
     m_PersistentCalls:
       m_Calls: []
   onAttackPosition:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9074935858946550499}
+      - m_Target: {fileID: 6682249251337182717}
         m_TargetAssemblyTypeName: ParticleEmitCaller, Assembly-CSharp
         m_MethodName: EmitAt
         m_Mode: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &9074935858946550499
+--- !u!114 &6682249251337182717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09390c586d4c60d4ba98260540f5270d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitterName: BigHit
+  emitterName: SmallHit
   position: {x: 0, y: 0}
-  angle: 30
-  scale: {x: 1, y: 1}
+  angle: 0
+  scale: {x: 1.5, y: 1.5}
   color: {r: 1, g: 1, b: 1, a: 1}
   lifetime: 1
 --- !u!1 &8232000401915384181
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.3852703, b: 0, a: 1}
+  m_Color: {r: 0.6725414, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &5756697611982334620
+--- !u!1001 &1343085624448455707
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -179,10 +179,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9183845539734442363}
     m_Modifications:
-    - target: {fileID: 372230676064920418, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1389881621833754734, guid: a7f86ba351c0d194c856475cbe4e4598, type: 3}
     - target: {fileID: 5380085956106317763, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -232,8 +228,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
---- !u!4 &381119687985136991 stripped
+--- !u!4 &6344022587901213656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5380085956106317763, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
-  m_PrefabInstance: {fileID: 5756697611982334620}
+  m_PrefabInstance: {fileID: 1343085624448455707}
   m_PrefabAsset: {fileID: 0}

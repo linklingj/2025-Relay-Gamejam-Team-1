@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9183845539734442363}
   - component: {fileID: 2843424042813973849}
-  - component: {fileID: -25063912067878426}
+  - component: {fileID: -6001535593040199623}
   m_Layer: 0
-  m_Name: Tank
+  m_Name: 2.Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3066554430608748196}
-  - {fileID: 5891375997603975637}
+  - {fileID: 1532886104464664463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2843424042813973849
@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e05b01ef9383340901c56aab0edf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 4
+  <Damage>k__BackingField: 2
   onAttack:
     m_PersistentCalls:
       m_Calls: []
   onAttackPosition:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -25063912067878426}
+      - m_Target: {fileID: -6001535593040199623}
         m_TargetAssemblyTypeName: ParticleEmitCaller, Assembly-CSharp
         m_MethodName: EmitAt
         m_Mode: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-25063912067878426
+--- !u!114 &-6001535593040199623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,7 +81,7 @@ MonoBehaviour:
   emitterName: BigHit
   position: {x: 0, y: 0}
   angle: 30
-  scale: {x: 1.5, y: 1.5}
+  scale: {x: 1.25, y: 1.25}
   color: {r: 1, g: 1, b: 1, a: 1}
   lifetime: 1
 --- !u!1 &8232000401915384181
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.10489915, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9069362, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1975876192090881558
+--- !u!1001 &6911899967459641420
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -182,7 +182,7 @@ PrefabInstance:
     - target: {fileID: 372230676064920418, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 3611668390295542199, guid: a7f86ba351c0d194c856475cbe4e4598, type: 3}
+      objectReference: {fileID: -432626044287500504, guid: a7f86ba351c0d194c856475cbe4e4598, type: 3}
     - target: {fileID: 5380085956106317763, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -232,8 +232,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
---- !u!4 &5891375997603975637 stripped
+--- !u!4 &1532886104464664463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5380085956106317763, guid: cd7b2609e2cbe434996ba9613b95d488, type: 3}
-  m_PrefabInstance: {fileID: 1975876192090881558}
+  m_PrefabInstance: {fileID: 6911899967459641420}
   m_PrefabAsset: {fileID: 0}
