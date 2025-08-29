@@ -95,7 +95,7 @@ public class EnemyManager : MonoBehaviour
             Pattern pattern = StageManager.Track.Chart[cursor++];
             if (!WeaponManager.Instance.PatternTable.TryGetValue(pattern.Count(), out Weapon weapon))
             {
-                SLogger.LogError($"No weapon for pattern of length {pattern.Count()}");
+                if(pattern.Count() > 0)SLogger.LogError($"No weapon for pattern of length {pattern.Count()}");
                 continue;
             }
             Enemy enemy = Borrow(FindEnemyOf(weapon.Damage));
@@ -123,10 +123,9 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    //기존에 health에 따라 다른 적 불러옴. 지금은 강제로 첫번째 적 (health=1)만 불러오게 해놓음
+    //기존에 health에 따라 다른 적 불러옴. 
     Enemy FindEnemyOf(int health)
     {
-        health = 1;
         foreach (Enemy enemy in enemies)
         {
             if (enemy.Health == health)

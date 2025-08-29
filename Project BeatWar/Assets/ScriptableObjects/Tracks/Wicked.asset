@@ -16,13 +16,15 @@ MonoBehaviour:
   <BPM>k__BackingField: 50
   <Delay>k__BackingField: 0
   <Offset>k__BackingField: 0
-  <Chart>k__BackingField: 010204080102040801020408
+  <Chart>k__BackingField: 010204080102040801020408000e0c08040001000100040004000100000100040e0000000000000e02040800080402000102040801020c000f0e0c080f0f0f0f0d0002020202000d09090505
   <Clip>k__BackingField: {fileID: 8300000, guid: fc2e3d59cb856b446bbbd7c678bc50c8, type: 3}
   <Lanes>k__BackingField: 60
   <SpawnRateBase>k__BackingField: 0.5
   <SpawnRateAddition>k__BackingField: 0.005
+  patternStartBeat: 3
   Interval: 2
   enemiesPerSpawn: 4
+  randomizeLanes: 0
   <Artist>k__BackingField: Avenza
   <Difficulty>k__BackingField: 3
   <Cover>k__BackingField: {fileID: -8029113686279106105, guid: 33240c1613dfb7b45bd52cca351840f7, type: 3}

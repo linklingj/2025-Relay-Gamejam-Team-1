@@ -41,7 +41,7 @@ public class SSController : MonoBehaviour
     {
         if (cs.HasTrack() is false)
         {
-            infoPanel.alpha = 0;
+             infoPanel.alpha = 0;
             previewAudioSource.Stop();
             
             return;
