@@ -9,15 +9,17 @@ public class Enemy : Entity
 
     public Pattern Weakness { get; private set; }
     
-    [SerializeField] private Vector2[] spawnPoint = new Vector2[4];
+    [SerializeField] private Vector2 spawnPoint;
     [SerializeField] GameObject subEnemyPrefab;
+    [SerializeField] public bool spawnFlag;
 
     public virtual void Enable(Enemy original)
     {
         Original = original;
         Weakness = PatternUtils.Random(Health);
         Beat = BeatManager.Instance.CurrentBeat;
-        StartCoroutine(SpawnRoutine(BeatManager.Instance.CurrentBeat, BeatManager.Instance.CurrentSubBeat));
+        spawnFlag = false;
+        //StartCoroutine(SpawnRoutine(BeatManager.Instance.CurrentBeat, BeatManager.Instance.CurrentSubBeat));
         base.Enable();
     }
 
@@ -36,41 +38,48 @@ public class Enemy : Entity
             Player.Instance.Deal(Health);
             EnemyManager.Instance.OnHitCaller.EmitAt(Player.Instance.transform.position);
         }
+        
+        int subBeat = BeatManager.Instance.CurrentSubBeat;
+        if (Weakness.HasFlag(subBeat.ToPattern()))
+           SpawnSubEnemy(subBeat);
     }
     
-    IEnumerator SpawnRoutine(int currentBeat, int currentSubBeat)
-    {
-        int lastSubBeat = currentSubBeat-1;
-
-        while (true)
-        {
-            // 조건 체크: 게임중이며 현재 Beat 제한 안에 있어야 함
-            if (!(StageManager.Instance.Started 
-                  && !StageManager.Instance.Ended 
-                  && BeatManager.Instance.CurrentBeat < currentBeat + 1))
-            {
-                yield break; // 조건 위배시 코루틴 종료
-            }
-
-            // subBeat가 바뀌었는지 확인
-            if (BeatManager.Instance.CurrentSubBeat != lastSubBeat)
-            {
-                lastSubBeat = BeatManager.Instance.CurrentSubBeat;
-
-                // subEnemy 생성
-                if (Weakness.HasFlag(PatternUtils.ToPattern(lastSubBeat)))
-                    SpawnSubEnemy(lastSubBeat);
-            }
-
-            yield return null; // 다음 프레임까지 대기
-        }
-    }
+    // IEnumerator SpawnRoutine(int currentBeat, int currentSubBeat)
+    // {
+    //     int lastSubBeat = currentSubBeat-1;
+    //
+    //     while (true)
+    //     {
+    //         // 조건 체크: 게임중이며 현재 Beat 제한 안에 있어야 함
+    //         if (!(StageManager.Instance.Started 
+    //               && !StageManager.Instance.Ended 
+    //               && BeatManager.Instance.CurrentBeat < currentBeat + 1))
+    //         {
+    //             yield break; // 조건 위배시 코루틴 종료
+    //         }
+    //
+    //         // subBeat가 바뀌었는지 확인
+    //         if (BeatManager.Instance.CurrentSubBeat != lastSubBeat)
+    //         {
+    //             lastSubBeat = BeatManager.Instance.CurrentSubBeat;
+    //
+    //             // subEnemy 생성
+    //             if (Weakness.Equals(lastSubBeat.ToPattern()))
+    //                 SpawnSubEnemy(lastSubBeat);
+    //         }
+    //
+    //         yield return null; // 다음 프레임까지 대기
+    //     }
+    // }
     
     List<GameObject> spawnedSubEnemies = new List<GameObject>();
     
     void SpawnSubEnemy(int subBeat)
     {
-        Vector2 spawnPos = spawnPoint[subBeat % 4];
+        if (spawnFlag) return;
+        spawnFlag = true;
+        
+        Vector2 spawnPos = spawnPoint;
         GameObject subEnemy = Instantiate(subEnemyPrefab, transform);
         subEnemy.transform.localPosition = spawnPos;
         spawnedSubEnemies.Add(subEnemy);

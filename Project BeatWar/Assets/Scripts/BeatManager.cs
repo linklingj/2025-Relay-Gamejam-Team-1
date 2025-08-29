@@ -17,6 +17,7 @@ public class BeatManager : MonoBehaviour
     // ⬇️ 매 프레임 Calibration.Offset을 반영 (실시간 적용)
     public double ElapsedSec => AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
     public float Beat => (float)(ElapsedSec * BPS);
+    
     public int CurrentBeat => Mathf.FloorToInt(Beat);
     public int CurrentSubBeat => Mathf.FloorToInt(Beat * BeatUtils.SUB_BEAT_LENGTH) % BeatUtils.SUB_BEAT_LENGTH;
 

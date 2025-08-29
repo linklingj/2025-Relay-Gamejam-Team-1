@@ -65,6 +65,7 @@ public class Track : ScriptableObject
     public float SpawnRateAddition { get; private set; }
     
     [field: Header("Chart Settings")]
+    public int patternStartBeat = 0; // the beat at which the pattern starts
     public int Interval = 2; // in beats
     public int enemiesPerSpawn = 1; // enemies spawned per spawn event
     public bool randomizeLanes = true;

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a428fae7e493447b979884c1394d7cbd, type: 3}
   m_Name: CurSelected
   m_EditorClassIdentifier: 
-  track: {fileID: 0}
+  track: {fileID: 11400000, guid: 3b6ac64d7bd73154ab5baa096846cc7e, type: 2}

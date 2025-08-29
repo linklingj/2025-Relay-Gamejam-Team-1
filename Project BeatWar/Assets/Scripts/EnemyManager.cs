@@ -27,8 +27,9 @@ public class EnemyManager : MonoBehaviour
     public ParticleEmitCaller OnHitCaller { get; private set; }
 
     WeightedRandom enemyWeights;
-
-    int currentBeat = 0;
+    
+    [SerializeField]
+    private int _currentBeat;
     private int cursor = 0;
 
     void Awake()
@@ -37,7 +38,6 @@ public class EnemyManager : MonoBehaviour
         OnHitCaller = GetComponent<ParticleEmitCaller>();
         SetEnemyWeights();
         cursor = 0;
-        
     }
 
     void SetEnemyWeights()
@@ -57,14 +57,17 @@ public class EnemyManager : MonoBehaviour
         interval = currentTrack.Interval;
         enemiesPerSpawn = currentTrack.enemiesPerSpawn;
         randomLane = currentTrack.randomizeLanes;
+        _currentBeat = currentTrack.patternStartBeat - interval;
     }
 
     void Update()
     {
         while (StageManager.Instance.Started
-            && BeatManager.Instance.CurrentBeat >= currentBeat + interval)
+            && BeatManager.Instance.CurrentBeat >= _currentBeat + interval)
         {
-            currentBeat = BeatManager.Instance.CurrentBeat;
+            SLogger.Log($"Spawning enemies at beat {BeatManager.Instance.CurrentBeat}");
+            
+            _currentBeat = BeatManager.Instance.CurrentBeat;
             SpawnEnemies();
             //SpawnRandomEnemies();
         }
@@ -72,7 +75,6 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        SLogger.Log($"Spawning enemies at beat {currentBeat}");
         if (cursor >= StageManager.Track.Chart.Length)
         {
             return;
@@ -91,7 +93,6 @@ public class EnemyManager : MonoBehaviour
             }
             
             Pattern pattern = StageManager.Track.Chart[cursor++];
-            SLogger.Log($"Spawning {cursor}enemy at lane {lanes[i]}");
             if (!WeaponManager.Instance.PatternTable.TryGetValue(pattern.Count(), out Weapon weapon))
             {
                 SLogger.LogError($"No weapon for pattern of length {pattern.Count()}");

@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour
     public void Attack()
     {
         Entity target = Entity.Scan(Lane.Index, Damage);
-        if (target != null && target.Health == Damage)
+        if (target != null && target.Health <= Damage)
         {
             target.Kill();
             if (target is Enemy enemy && enemy.Weakness == Pattern)
@@ -54,6 +54,7 @@ public class Weapon : MonoBehaviour
                 // Break!
                 Player.Instance.Heal(Damage);
             }
+            
             onAttack.Invoke(target);
             onAttackPosition.Invoke(target.transform.position);
         }
