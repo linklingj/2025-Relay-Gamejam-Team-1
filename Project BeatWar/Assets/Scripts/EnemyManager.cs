@@ -49,8 +49,8 @@ public class EnemyManager : MonoBehaviour
             && BeatManager.Instance.CurrentBeat >= currentBeat + interval)
         {
             currentBeat = BeatManager.Instance.CurrentBeat;
-            SpawnEnemies();
-            //SpawnRandomEnemies();
+            //SpawnEnemies();
+            SpawnRandomEnemies();
         }
     }
 
@@ -67,6 +67,7 @@ public class EnemyManager : MonoBehaviour
             return;
         }
         Enemy enemy = Borrow(FindEnemyOf(weapon.Damage));
+        // enemy.SetPattern(pattern);
         StageManager.Instance.Locate(enemy, StageManager.Track.Lanes.Random());
     }
 
@@ -78,7 +79,8 @@ public class EnemyManager : MonoBehaviour
             {
                 if (Random.value < StageManager.Track.SpawnRate(BeatManager.Instance.Beat))
                 {
-                    Enemy enemy = Borrow(enemies[enemyWeights.Get()]);
+                    // Enemy enemy = Borrow(enemies[enemyWeights.Get()]);   //강제로 0번째 적만 나오게 함
+                    Enemy enemy = Borrow(enemies[0]);
                     StageManager.Instance.Locate(enemy, i);
                 }
             }

@@ -21,6 +21,11 @@ public class Enemy : Entity
         base.Enable();
     }
 
+    public void SetPattern(Pattern pattern)
+    {
+        Weakness = pattern;
+    }
+
     protected override void Update()
     {
         base.Update();
