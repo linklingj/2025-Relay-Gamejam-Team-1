@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e053bfb7064c24f9f33c142bdd34ce, type: 3}
+  m_Name: StarBurster
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Starburster
+  <BPM>k__BackingField: 49
+  <Delay>k__BackingField: 0
+  <Offset>k__BackingField: 0.5444444
+  <Chart>k__BackingField: 0100040001000400010004000100040001000400010004000100040001000400010204080804020101020408080402010500050003000c0003000c0003000c0003000c0007000000000000070e00000005020408050204080902040809020408050a050a0a0a05050f0e0c08080c0e0f0102040805060404010204080506040405020408010104040f00000c05000500
+  <Clip>k__BackingField: {fileID: 8300000, guid: 80151a67989e8164b8b96cc8477f0193, type: 3}
+  <Lanes>k__BackingField: 60
+  <SpawnRateBase>k__BackingField: 0
+  <SpawnRateAddition>k__BackingField: 0
+  patternStartBeat: 8
+  Interval: 2
+  enemiesPerSpawn: 4
+  randomizeLanes: 1
+  <Artist>k__BackingField: Fontaines D.C.
+  <Difficulty>k__BackingField: 2
+  <Cover>k__BackingField: {fileID: -8739910607730518316, guid: 27d3d37785e2d9c47b2713c12d701171, type: 3}
+  <PreviewStart>k__BackingField: 60

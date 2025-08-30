@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Tutorial DrumBeat
   m_EditorClassIdentifier: 
   <Name>k__BackingField: For Beggniner
-  <BPM>k__BackingField: 80
+  <BPM>k__BackingField: 20
   <Delay>k__BackingField: 0
-  <Offset>k__BackingField: 0
-  <Chart>k__BackingField: 01000001000300000300070000070f00000f010201040108030c030c000e0e000f0f
+  <Offset>k__BackingField: 0.3333333
+  <Chart>k__BackingField: 0100000103000003070000070f00000f010201040108030c030c000e0e000f0f
   <Clip>k__BackingField: {fileID: 8300000, guid: 31daedb4da4d33b45898f9a5de3ab468, type: 3}
   <Lanes>k__BackingField: 24
   <SpawnRateBase>k__BackingField: 0
   <SpawnRateAddition>k__BackingField: 0
-  patternStartBeat: 4
+  patternStartBeat: 2
   Interval: 2
   enemiesPerSpawn: 2
   randomizeLanes: 0
