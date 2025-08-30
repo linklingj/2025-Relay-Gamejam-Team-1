@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiffViewer : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class DiffViewer : MonoBehaviour
         for (int i = 0; i < stars.Length; i++)
         {
             // 별 색깔을 칠하기
-            stars[i].GetComponent<SpriteRenderer>().color = (i < difficulty) ? Color.black : Color.gray;
+            stars[i].GetComponent<Image>().color = (i < difficulty) ? Color.black : Color.gray;
         }
     }
 }

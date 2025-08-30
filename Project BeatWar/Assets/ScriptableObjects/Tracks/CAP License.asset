@@ -15,13 +15,13 @@ MonoBehaviour:
   <Name>k__BackingField: CAP License
   <BPM>k__BackingField: 48
   <Delay>k__BackingField: 0
-  <Offset>k__BackingField: 0.8
+  <Offset>k__BackingField: 0
   <Chart>k__BackingField: 010204080102000001020408010204080102040801020000010402080f000000010000080900000005000a000005000a08000001000009000f000a000f000500050404050804020109080809080c0e0f
   <Clip>k__BackingField: {fileID: 8300000, guid: 3da2a0f353f745544ab66e559ac61edf, type: 3}
   <Lanes>k__BackingField: 60
   <SpawnRateBase>k__BackingField: 0.5
   <SpawnRateAddition>k__BackingField: 0.005
-  patternStartBeat: 4
+  patternStartBeat: 8
   Interval: 2
   enemiesPerSpawn: 4
   randomizeLanes: 0

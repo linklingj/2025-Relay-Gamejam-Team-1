@@ -4322,6 +4322,7 @@ MonoBehaviour:
   artistText: {fileID: 843791600}
   highScoreText: {fileID: 602286019}
   bpmText: {fileID: 568782326}
+  diffView: {fileID: 573280778}
 --- !u!1 &2054811456
 GameObject:
   m_ObjectHideFlags: 0

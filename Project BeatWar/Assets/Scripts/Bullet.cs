@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        float progress = Mathf.Max(BeatManager.Instance.Beat - weapon.Beat, 0f);
+        float progress = Mathf.Repeat(BeatManager.Instance.Beat01, 1f);
         Entity target = Entity.Scan(weapon.Lane.Index, weapon.Damage);
         if (target != null)
         {

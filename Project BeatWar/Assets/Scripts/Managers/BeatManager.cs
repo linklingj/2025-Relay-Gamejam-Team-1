@@ -8,27 +8,36 @@ public class BeatManager : MonoBehaviour
     [field: Header("References")]
     [field: SerializeField] public AudioSource Source { get; private set; }
 
-    // ⬇️ dsp 기준 앵커
-    double _dspBeat0;       // "비트 0"이 발생하는 DSP 시각(캘리브레이션 미포함)
-    double _dspAudioStart;  // 오디오가 실제로 플레이되는 DSP 시각(로그용)
+    // --- Input을 '약간' 앞당길 양(서브비트 단위). 0~0.49 권장 ---
+    [SerializeField, Range(0f, 0.49f)]
+    float inputLeadSub = 0.25f; // L=4, 120BPM 기준 약 31.25ms 선반영
+
+    double _dspBeat0;
+    double _dspAudioStart;
 
     public float BPS => StageManager.Track.BPS;
 
-    // 비트 흐름 중지 상태 관리
     bool _stopped;
     double _stoppedElapsedSec;
 
-    // ⬇️ 매 프레임 Calibration.Offset을 반영 (실시간 적용)
     public double ElapsedSec => _stopped
         ? _stoppedElapsedSec
         : AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
-    public float Beat => (float)(ElapsedSec * BPS);
-    
-    public int CurrentBeat => Mathf.FloorToInt(Beat);
-    public int CurrentSubBeat => Mathf.FloorToInt(Beat * BeatUtils.SUB_BEAT_LENGTH) % BeatUtils.SUB_BEAT_LENGTH;
+
+    // 기존 Beat/Current*는 '표시/스폰용 기준'으로 유지하되 같은 양자화 사용
+    public int CurrentBeat
+    {
+        get { BeatUtils.Quantize(StageManager.Track.BPM, ElapsedSec, out var mb, out var sb, 0.0); return mb; }
+    }
+    public int CurrentSubBeat
+    {
+        get { BeatUtils.Quantize(StageManager.Track.BPM, ElapsedSec, out var mb, out var sb, 0.0); return sb; }
+    }
 
     public int InputBeat { get; private set; }
     public int InputSubBeat { get; private set; }
+    
+    public float Beat01 => (float)((ElapsedSec / StageManager.Track.SPB) - CurrentBeat);
 
     FSM<BeatManager> _stateMachine;
 
@@ -49,22 +58,13 @@ public class BeatManager : MonoBehaviour
     {
         public override void OnBegin(BeatManager owner)
         {
-            // 흐름 재개를 위해 초기화
             owner._stopped = false;
-
-            // ⬇️ 모든 '절대 시간'은 DSP 기준으로 고정
             var dspNow = AudioSettings.dspTime;
 
-            // 카운트다운(딜레이) - 초 단위
             double delaySec = StageManager.Track.Delay * StageManager.Track.SPB;
-
-            // "비트 0"이 발생하는 DSP 시각 (곡/씬의 기준점)
             owner._dspBeat0 = dspNow + delaySec;
 
-            // 트랙 자체 오프셋(곡 파일과 비트 그리드의 정렬 차이) - 초 단위
             double trackOffsetSec = StageManager.Track.Offset * StageManager.Track.SPB;
-
-            // 오디오 재생은 '비트0 + 트랙오프셋'에 맞춰 스케줄 (Calibration은 스케줄에 개입 X)
             owner.Source.clip = StageManager.Track.Clip;
             owner._dspAudioStart = owner._dspBeat0 + trackOffsetSec;
             owner.Source.PlayScheduled(owner._dspAudioStart);
@@ -78,7 +78,6 @@ public class BeatManager : MonoBehaviour
 
         public override void OnUpdate(BeatManager owner)
         {
-            // 딜레이 끝나면 게임 시작
             if (AudioSettings.dspTime >= owner._dspBeat0)
                 Set<Gameplay>();
         }
@@ -89,14 +88,16 @@ public class BeatManager : MonoBehaviour
         public override void OnBegin(BeatManager owner)
         {
             StageManager.Instance.Begin();
+            SLogger.Log("Beat Flow Started");
         }
 
         public override void OnUpdate(BeatManager owner)
         {
-            // ⬇️ 여기서도 Timer.Elapsed 대신 DSP 기반 경과시간 사용
-            float sec = (float)owner.ElapsedSec;
-            BeatUtils.RoundBeat(StageManager.Track.BPM, sec, out int mainBeat, out int subBeat);
-            owner.InputBeat = mainBeat;
+            // Input은 '살짝 우선시'된 그리드로 양자화
+            BeatUtils.Quantize(StageManager.Track.BPM, owner.ElapsedSec,
+                               out int mainBeat, out int subBeat,
+                               owner.inputLeadSub, BeatUtils.SUB_BEAT_LENGTH);
+            owner.InputBeat    = mainBeat;
             owner.InputSubBeat = subBeat;
         }
 
@@ -106,13 +107,12 @@ public class BeatManager : MonoBehaviour
         }
     }
 
-    // 비트의 흐름을 즉시 중지하고 현재 시각을 고정
     public void StopBeatFlow(bool stopaudio = true)
     {
         if (_stopped) return;
         _stoppedElapsedSec = AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
         _stopped = true;
-        if(stopaudio) End();
+        if (stopaudio) End();
     }
 
     public void End() => _stateMachine.Set(null);

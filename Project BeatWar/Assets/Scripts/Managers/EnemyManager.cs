@@ -63,7 +63,7 @@ public class EnemyManager : MonoBehaviour
         while (StageManager.Instance.Started
             && BeatManager.Instance.CurrentBeat >= _currentBeat + interval)
         {
-            SLogger.Log($"Spawning enemies at beat {BeatManager.Instance.CurrentBeat}");
+//            SLogger.Log($"Spawning enemies at beat {BeatManager.Instance.CurrentBeat}");
             
             _currentBeat = BeatManager.Instance.CurrentBeat;
             SpawnEnemies();
@@ -111,7 +111,7 @@ public class EnemyManager : MonoBehaviour
         {
             if (StageManager.Track.Lanes.HasLane(i))
             {
-                if (Random.value < StageManager.Track.SpawnRate(BeatManager.Instance.Beat))
+                if (Random.value < StageManager.Track.SpawnRate(BeatManager.Instance.Beat01))
                 {
                     // Enemy enemy = Borrow(enemies[enemyWeights.Get()]);   //강제로 0번째 적만 나오게 함
                     Enemy enemy = Borrow(enemies[0]);

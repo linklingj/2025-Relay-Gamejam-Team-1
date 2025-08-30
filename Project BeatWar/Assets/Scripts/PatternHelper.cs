@@ -9,7 +9,7 @@ public class PatternHelper : MonoBehaviour
     
     private void Update()
     {
-        Pattern subBeatPattern = BeatManager.Instance.InputSubBeat.ToPattern();
+        Pattern subBeatPattern = BeatManager.Instance.CurrentSubBeat.ToPattern();
         for (int i = 0; i < 4; i++)
         {
             dots[i].Set(subBeatPattern.HasPattern(i));

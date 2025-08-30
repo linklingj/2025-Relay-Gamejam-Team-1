@@ -12,7 +12,7 @@ public class BeatIndicator : MonoBehaviour
 
     void Update()
     {
-        Fill.fillAmount = Mathf.Repeat(1f - BeatManager.Instance.Beat, 1f);
+        Fill.fillAmount = Mathf.Repeat(1f - BeatManager.Instance.Beat01, 1f);
 
         if (beat != BeatManager.Instance.CurrentBeat)
         {

@@ -15,16 +15,16 @@ MonoBehaviour:
   <Name>k__BackingField: Clash of sword
   <BPM>k__BackingField: 70
   <Delay>k__BackingField: 0
-  <Offset>k__BackingField: 0
-  <Chart>k__BackingField: 0102040801020408010204080102040805050000090900000f00000e0101010101020408010204080f0e0c08
+  <Offset>k__BackingField: 0.8571429
+  <Chart>k__BackingField: 0102040801020408010204080102040805050000090900000f00000e0101010101020408010204080f0e0c080f000000000e00000e000700000f0f00090a0c0801020408010204080102040801020408
   <Clip>k__BackingField: {fileID: 8300000, guid: c476071ae5b7a3d498788a046ba3b10d, type: 3}
   <Lanes>k__BackingField: 60
   <SpawnRateBase>k__BackingField: 0.5
   <SpawnRateAddition>k__BackingField: 0.005
-  patternStartBeat: 4
+  patternStartBeat: 5
   Interval: 2
   enemiesPerSpawn: 4
-  randomizeLanes: 0
+  randomizeLanes: 1
   <Artist>k__BackingField: Oscar Leites
   <Difficulty>k__BackingField: 5
   <Cover>k__BackingField: {fileID: 7985561169665322837, guid: 91ee4e67750220a428746f038dce3c41, type: 3}

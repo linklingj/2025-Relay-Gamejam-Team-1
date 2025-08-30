@@ -26,6 +26,14 @@ public class Calibration : MonoBehaviour
     public UnityEvent OnFinish;
 
     LogScope logScope;
+    
+    [ContextMenu("Reset Offset")]
+    public void ResetOffset()
+    {
+        Offset = 0f;
+        PlayerPrefs.SetFloat("Offset", Offset);
+        SLogger.Log("Offset Reset");
+    }
 
     void Start()
     {

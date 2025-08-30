@@ -19,7 +19,8 @@ public class SSController : MonoBehaviour
     public TMP_Text  titleText;
     public TMP_Text  artistText;
     public TMP_Text  highScoreText;
-    [FormerlySerializedAs("difficultyText")] public TMP_Text  bpmText;
+    public TMP_Text  bpmText;
+    public DiffViewer diffView;
     #endregion
 
     private void Start()
@@ -64,5 +65,7 @@ public class SSController : MonoBehaviour
         // Highlight 초로 변경
         previewAudioSource.time = track.PreviewStart;
         previewAudioSource.Play();
+        
+        diffView.SetDifficulty(track.Difficulty);
     }
 }
