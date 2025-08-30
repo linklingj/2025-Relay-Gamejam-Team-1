@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class GameFinishUI : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup group;
+    private CanvasGroup group;
     [SerializeField] private TMP_Text score;
     [SerializeField] private TMP_Text resultText;
 
-    public string winText = "Clear!";
+    public string winText = "Win!";
     public string loseText = "PanCu. Kim (2003 - 2025)";
 
     bool shown;
@@ -24,6 +25,7 @@ public class GameFinishUI : MonoBehaviour
     }
 
     // 나도 이따구로 짜고싶지 않았는데 이벤트 핸들러가 시발 문제가 많아 유니티6 병신새끼들아
+    // ??누구세요
     public void Update()
     {
         switch (StageManager.Instance.Ended)

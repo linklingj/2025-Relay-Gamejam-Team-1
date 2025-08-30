@@ -36,8 +36,6 @@ public class SSController : MonoBehaviour
     }
 
     private void OnDestroy() {
-        if (SceneLoader.IsLoading) return;
-
         cs.OnTrackSelected -= UpdateUI; cs.OnTrackDeselected -= () => UpdateUI();
     }
 

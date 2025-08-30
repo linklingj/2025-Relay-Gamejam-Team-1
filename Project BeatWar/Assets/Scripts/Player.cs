@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public CinemachineImpulseSource impulseSource;
 
     public ParticleEmitCaller OnHealCaller { get; private set; }
+    public UnityEvent OnPlayerShoot;
 
     public void Deal(int damage)
     {
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
             ClearLanes();
         }
 
+        bool shoot = false;
         for (int i = 0; i < 8; i++)
         {
             if (StageManager.Track.Lanes.HasLane(i))
@@ -100,6 +103,7 @@ public class Player : MonoBehaviour
 
                 if (control.wasPressedThisFrame)
                 {
+                    shoot = true;
                     Lane lane = lanes[i];
 
                     int subBeat = BeatManager.Instance.InputSubBeat;
@@ -116,6 +120,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        if (shoot) OnPlayerShoot?.Invoke();
     }
 }
 
