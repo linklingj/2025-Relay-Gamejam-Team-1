@@ -84,11 +84,15 @@ public class Calibration : MonoBehaviour
             owner.OnReady.Invoke();
             timer.Set();
             startTimer.Set(owner.Source.clip.length);
+            beatTimer.Add(60f / owner.BPM);
         }
 
         public override void OnUpdate(Calibration owner)
-        {
-            if (PlayerInputs.TapDown)
+        {   
+            // 준비 기간에 입력 방지
+            var flag = timer.Elapsed > owner.Source.clip.length * 0.75f;
+
+            if (PlayerInputs.TapDown && flag)
             {
                 timeStamp ??= new float[owner.TestCount];
                 timeStamp[tapCount++] = timer.Elapsed - owner.Source.clip.length;
@@ -189,9 +193,21 @@ public class Calibration : MonoBehaviour
 
     class Finished : State<Calibration>
     {
+        private bool _locked = false;
+
         public override void OnBegin(Calibration owner)
         {
             owner.OnFinish.Invoke();
         }
+
+        public override void OnUpdate(Calibration owner) {
+            if (PlayerInputs.TapDown && !_locked) {
+                // 씬 이동하기
+                
+                _locked = true; // 혹시 모를 중복 호출 방지
+                owner.GetComponent<LoadScene>().Load();
+            }
+        }
+
     }
 }
