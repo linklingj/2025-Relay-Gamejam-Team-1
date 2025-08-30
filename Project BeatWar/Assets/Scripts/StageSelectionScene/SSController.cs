@@ -1,6 +1,7 @@
 using SeolMJ;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SSController : MonoBehaviour
@@ -17,11 +18,11 @@ public class SSController : MonoBehaviour
     public Image     coverImage;
     public TMP_Text  titleText;
     public TMP_Text  artistText;
-    public TMP_Text  bpmText;
-    public TMP_Text  difficultyText;
+    public TMP_Text  highScoreText;
+    [FormerlySerializedAs("difficultyText")] public TMP_Text  bpmText;
     #endregion
 
-    private void Awake()
+    private void Start()
     {
         if (cs == null) {Debug.LogError("No CurSelected found in scene");}
         else {cs.OnTrackSelected += UpdateUI; cs.OnTrackDeselected += () => UpdateUI();}
@@ -54,8 +55,8 @@ public class SSController : MonoBehaviour
         Track track = cs.GetTrack();
         titleText.text = track.Name;
         artistText.text = track.Artist;
-        bpmText.text = track.BPM.ToString("F0") + " BPM";
-        difficultyText.text = track.Difficulty.ToString();
+        bpmText.text = "BPM: " + track.BPM.ToString("F0");
+        highScoreText.text = "High Score: " + ScoreSystem.GetHighScore(track);
         
         // set audio
         previewAudioSource.clip = track.Clip;

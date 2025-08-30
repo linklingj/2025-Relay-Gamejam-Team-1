@@ -43,10 +43,11 @@ public class StageManager : MonoBehaviour
 
     public bool Started { get; private set; } = false;
     public bool Ended { get; private set; } = false;
-    
+    public bool IsWin { get; private set; }
+
     private bool _canEscape = false;
-    
-    public event UnityAction<bool> OnStageEnd; // bool: clear or not
+
+    public event UnityAction<bool> OnStageEnd = delegate { };
 
     public void Begin()
     {
@@ -56,6 +57,7 @@ public class StageManager : MonoBehaviour
         WeaponManager.Instance.Begin();
         ScoreSystem.Reset(track: Track);
         EnemyManager.Instance.Setup(track: Track);
+        OnStageEnd = delegate { };
         
         Time.timeScale = 1f;
     }
@@ -70,6 +72,8 @@ public class StageManager : MonoBehaviour
         
         StartCoroutine(AllowToEscape());
         OnStageEnd?.Invoke(clear);
+        
+        IsWin = clear;
     }
 
     private IEnumerator AllowToEscape()

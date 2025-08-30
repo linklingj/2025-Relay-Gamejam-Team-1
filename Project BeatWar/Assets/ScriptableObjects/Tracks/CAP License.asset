@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e053bfb7064c24f9f33c142bdd34ce, type: 3}
+  m_Name: CAP License
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: CAP License
+  <BPM>k__BackingField: 48
+  <Delay>k__BackingField: 0
+  <Offset>k__BackingField: 0.8
+  <Chart>k__BackingField: 010204080102000001020408010204080102040801020000010402080f000000010000080900000005000a000005000a08000001000009000f000a000f000500050404050804020109080809080c0e0f
+  <Clip>k__BackingField: {fileID: 8300000, guid: 3da2a0f353f745544ab66e559ac61edf, type: 3}
+  <Lanes>k__BackingField: 60
+  <SpawnRateBase>k__BackingField: 0.5
+  <SpawnRateAddition>k__BackingField: 0.005
+  patternStartBeat: 4
+  Interval: 2
+  enemiesPerSpawn: 4
+  randomizeLanes: 0
+  <Artist>k__BackingField: Deepflow
+  <Difficulty>k__BackingField: 3
+  <Cover>k__BackingField: {fileID: 478004336097990301, guid: 805a3ba29068a1e48bc07c54735cfe15, type: 3}
+  <PreviewStart>k__BackingField: 48

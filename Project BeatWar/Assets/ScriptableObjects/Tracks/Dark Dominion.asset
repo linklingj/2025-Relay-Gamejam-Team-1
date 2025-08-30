@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e053bfb7064c24f9f33c142bdd34ce, type: 3}
+  m_Name: Dark Dominion
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Dark Dominion
+  <BPM>k__BackingField: 70
+  <Delay>k__BackingField: 0
+  <Offset>k__BackingField: 0.2
+  <Chart>k__BackingField: 0102040801020408010204080102040805050000090900000f00000e0101010101020408010204080f0e0c08
+  <Clip>k__BackingField: {fileID: 8300000, guid: 60ebbcbf45e1251499654071087f0718, type: 3}
+  <Lanes>k__BackingField: 60
+  <SpawnRateBase>k__BackingField: 0.5
+  <SpawnRateAddition>k__BackingField: 0.005
+  patternStartBeat: 3
+  Interval: 2
+  enemiesPerSpawn: 4
+  randomizeLanes: 1
+  <Artist>k__BackingField: Avenza
+  <Difficulty>k__BackingField: 3
+  <Cover>k__BackingField: {fileID: -8029113686279106105, guid: 33240c1613dfb7b45bd52cca351840f7, type: 3}
+  <PreviewStart>k__BackingField: 45
