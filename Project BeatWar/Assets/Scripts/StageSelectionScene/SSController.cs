@@ -68,7 +68,7 @@ public class SSController : MonoBehaviour
         titleText.text = track.Name;
         artistText.text = track.Artist;
         bpmText.text = "BPM: " + track.BPM.ToString("F0");
-        highScoreText.text = "High Score: " + ScoreSystem.GetHighScore(track);
+        highScoreText.text = "최고 점수: " + ScoreSystem.GetHighScore(track);
         
         // set audio
         previewAudioSource.clip = track.Clip;

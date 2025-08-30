@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (StageManager.Instance.Paused) return;
         if (BeatManager.Instance.InputBeat >= 0
             && beat != BeatManager.Instance.InputBeat)
         {

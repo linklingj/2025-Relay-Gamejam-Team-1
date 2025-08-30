@@ -1,5 +1,6 @@
 using UnityEngine;
 using SeolMJ;
+using Sirenix.OdinInspector;
 
 public class BeatManager : MonoBehaviour
 {
@@ -17,12 +18,14 @@ public class BeatManager : MonoBehaviour
 
     public float BPS => StageManager.Track.BPS;
 
-    bool _stopped;
+    bool _stopped = false;
     double _stoppedElapsedSec;
+    double _stoppedDspTime; // 일시 정지한 시간 동안 누적된 DSP 시간 (이 시간은 게임 시간에 반영 x)
+    double _cachedDspTime;
 
-    public double ElapsedSec => _stopped
+    public double ElapsedSec => (_stopped
         ? _stoppedElapsedSec
-        : AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
+        : AudioSettings.dspTime - _dspBeat0 - Calibration.Offset) - _stoppedDspTime;
 
     // 기존 Beat/Current*는 '표시/스폰용 기준'으로 유지하되 같은 양자화 사용
     public int CurrentBeat
@@ -46,12 +49,16 @@ public class BeatManager : MonoBehaviour
     void Start()
     {
         PlayerInputs.Enable();
+        _stoppedDspTime = 0;
     }
 
     void Update()
     {
+        // if (_stopped) return;
         _stateMachine ??= new FSM<BeatManager>(this).Set<WaitForDelay>();
-        _stateMachine.Update();
+        // Debug.Log(ElapsedSec);
+
+        _stateMachine?.Update();
     }
 
     class WaitForDelay : State<BeatManager>
@@ -103,8 +110,27 @@ public class BeatManager : MonoBehaviour
 
         public override void OnEnd(BeatManager owner)
         {
-            owner.Source.Stop();
+            owner.Source.Pause();
         }
+    }
+
+    public void StartBeatFlow() {
+        if (!_stopped) return;
+
+        _stoppedDspTime += AudioSettings.dspTime - _cachedDspTime;
+
+        _stopped = false;
+        Source.Play();
+    }
+
+    public void PauseBeatFlow() {
+        if (_stopped) return;
+
+        _stoppedElapsedSec = AudioSettings.dspTime - _dspBeat0 - Calibration.Offset;
+        _cachedDspTime = AudioSettings.dspTime;
+        _stopped = true;
+
+        Source.Pause();
     }
 
     public void StopBeatFlow(bool stopaudio = true)

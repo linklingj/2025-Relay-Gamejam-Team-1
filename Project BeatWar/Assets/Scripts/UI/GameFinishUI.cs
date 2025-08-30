@@ -52,7 +52,7 @@ public class GameFinishUI : MonoBehaviour
     {
         if (!group) return;
         resultText.text = isWin ? winText : loseText;
-        score.text = $"Score: {ScoreSystem.CurrentScore}";
+        score.text = $"점수: {ScoreSystem.CurrentScore}";
         group.alpha = 1f;
         group.blocksRaycasts = true;
         group.interactable = true;

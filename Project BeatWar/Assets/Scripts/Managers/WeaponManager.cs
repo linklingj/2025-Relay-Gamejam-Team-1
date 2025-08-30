@@ -36,6 +36,8 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
+        if (StageManager.Instance.Paused) return;
+
         if (StageManager.Instance.Started
             && BeatManager.Instance.CurrentBeat > beat)
         {

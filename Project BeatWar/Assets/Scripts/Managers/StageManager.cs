@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using SeolMJ;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class StageManager : MonoBehaviour
 {
@@ -42,6 +44,7 @@ public class StageManager : MonoBehaviour
     }
 
     public bool Started { get; private set; } = false;
+    public bool Paused { get; private set; } = false;
     public bool Ended { get; private set; } = false;
     public bool IsWin { get; private set; }
 
@@ -49,22 +52,49 @@ public class StageManager : MonoBehaviour
 
     public event UnityAction<bool> OnStageEnd = delegate { };
 
+    public UnityEvent OnStageBegin;
+    public UnityEvent OnStagePause;
+
+    [ButtonGroup("Stage Control")]
+    [Button("Begin")]
     public void Begin()
     {
-        Started = true;
-        Ended = false;
-        _canEscape = false;
-        WeaponManager.Instance.Begin();
-        ScoreSystem.Reset(track: Track);
-        EnemyManager.Instance.Setup(track: Track);
-        OnStageEnd = delegate { };
-        
+        if (!Paused) {
+            Started = true;
+            Ended = false;
+
+            WeaponManager.Instance.Begin();
+            _canEscape = false;
+            ScoreSystem.Reset(track: Track);
+            EnemyManager.Instance.Setup(track: Track);
+            OnStageEnd = delegate { };
+        } else {
+            BeatManager.Instance.StartBeatFlow();
+        }
+
+        Paused = false;
         Time.timeScale = 1f;
+
+        OnStageBegin?.Invoke();
+    }
+
+    [ButtonGroup("Stage Control")]
+    [Button("Pause")]    
+    public void Pause() {
+        if (Ended) return;
+        Paused = true;
+
+        Time.timeScale = 0f;
+        BeatManager.Instance.PauseBeatFlow();
+
+        OnStagePause?.Invoke();
     }
 
     public void End(bool clear)
     {
         Ended = true;
+        Paused = true;
+
         Time.timeScale = 0f;
         
         // 비트 흐름과 오디오를 함께 정지
@@ -94,6 +124,12 @@ public class StageManager : MonoBehaviour
             }
         }
         
+        if (!Started) return;
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) {
+            if (Paused) Begin();
+            else Pause();
+        }
+
         if (BeatManager.Instance.CurrentBeat >= Track.GetFinishBeat() && !Ended)
         {
             End(clear: true);

@@ -119,6 +119,7 @@ namespace SeolMJ
         public struct Params
         {
             public bool DontSpawnPrefab;
+            public bool Reload;
         }
 
         public static void Load(params int[] scenes)
@@ -202,13 +203,15 @@ namespace SeolMJ
 
                 IsLoading = true;
 
-                for (int i = 0; i < Active.Count; i++)
-                {
-                    if (!Queue.Contains(Active[i])) continue;
+                if (!param.Reload) {
+                    for (int i = 0; i < Active.Count; i++)
+                    {
+                        if (!Queue.Contains(Active[i])) continue;
 
-                    Queue.Remove(Active[i]);
-                    Active.RemoveAt(i);
-                    i--;
+                        Queue.Remove(Active[i]);
+                        Active.RemoveAt(i);
+                        i--;
+                    }
                 }
 
                 Queue.Distinct();

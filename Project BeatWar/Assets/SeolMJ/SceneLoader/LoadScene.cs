@@ -9,4 +9,9 @@ public class LoadScene : MonoBehaviour
     {
         SceneLoader.Load(Scenes);
     }
+
+    public void Load(bool reload = false)
+    {
+        SceneLoader.Load(Scenes, new() { Reload = reload });
+    }
 }
