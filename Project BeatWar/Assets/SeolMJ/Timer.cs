@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SeolMJ
 {
-    public class Timer : ITimer
+    public class Timer
     {
         public float StartTime { get; set; }
         public float Duration { get; set; } = float.PositiveInfinity;
