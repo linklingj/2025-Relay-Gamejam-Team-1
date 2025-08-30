@@ -35,7 +35,7 @@ public class StageTrackView : MonoBehaviour
         {
             curSelected.ClearTrack();
         }
-        else
+        else if (curSelected.HasTrack() is false)
         {
             curSelected.SetTrack(track);
         }

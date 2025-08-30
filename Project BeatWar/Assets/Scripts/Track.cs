@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -39,7 +40,7 @@ public class Track : ScriptableObject
     [field: SerializeField]
     public float Offset { get; private set; }
 
-    [field: SerializeField, EnumButtons]
+    [field: SerializeField, EnumToggleButtons]
     public Pattern[] Chart { get; set; }
 
     /// <summary>

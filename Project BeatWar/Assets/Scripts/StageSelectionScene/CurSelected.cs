@@ -9,7 +9,7 @@ public class CurSelected : ScriptableObject
     
     public event UnityAction<Track> OnTrackSelected;
     public event UnityAction OnTrackDeselected;
-    
+
     public void SetTrack(Track newTrack)
     {
         track = newTrack;

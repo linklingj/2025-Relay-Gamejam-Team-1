@@ -15,7 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: For Beggniner
   <BPM>k__BackingField: 20
   <Delay>k__BackingField: 0
-  <Offset>k__BackingField: 0.3333333
+  <Offset>k__BackingField: 0.5
   <Chart>k__BackingField: 0100000103000003070000070f00000f010201040108030c030c000e0e000f0f
   <Clip>k__BackingField: {fileID: 8300000, guid: 31daedb4da4d33b45898f9a5de3ab468, type: 3}
   <Lanes>k__BackingField: 24

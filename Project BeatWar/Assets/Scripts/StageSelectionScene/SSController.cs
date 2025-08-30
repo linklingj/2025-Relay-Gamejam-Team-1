@@ -25,21 +25,18 @@ public class SSController : MonoBehaviour
 
     private void Start()
     {
-        cs.ClearTrack();
-    }
-
-    private void OnEnable()
-    {
         if (cs == null) {
             Debug.LogError("No CurSelected found in scene");
             return;
         }
 
+        if (SceneLoader.IsLoading) return;
         cs.OnTrackSelected += UpdateUI; cs.OnTrackDeselected += () => UpdateUI();
+        cs.ClearTrack();
     }
 
-    private void OnDisable() {
-        if (cs == null) return;
+    private void OnDestroy() {
+        if (SceneLoader.IsLoading) return;
 
         cs.OnTrackSelected -= UpdateUI; cs.OnTrackDeselected -= () => UpdateUI();
     }
@@ -47,7 +44,7 @@ public class SSController : MonoBehaviour
     private void Update()
     {
         // 우클릭시 deselect
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && cs.HasTrack())
         {
             cs.ClearTrack();
         }
@@ -57,7 +54,8 @@ public class SSController : MonoBehaviour
     {
         if (cs.HasTrack() is false)
         {
-            infoPanel.alpha = 0;
+            // infoPanel.alpha = 0;
+            UIAnimationGroup.Get("HideInfoBG").Play();
             previewAudioSource.Stop();
             
             return;
@@ -66,7 +64,8 @@ public class SSController : MonoBehaviour
         coverImage.sprite = cs.GetTrack().Cover;
         if (coverImage.sprite == null) coverImage.sprite = defaultCoverImage;
         
-        infoPanel.alpha = 1;
+        // infoPanel.alpha = 1;
+        UIAnimationGroup.Get("ShowInfoBG").Play();
         Track track = cs.GetTrack();
         titleText.text = track.Name;
         artistText.text = track.Artist;
