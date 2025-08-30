@@ -25,11 +25,25 @@ public class SSController : MonoBehaviour
 
     private void Start()
     {
-        if (cs == null) {Debug.LogError("No CurSelected found in scene");}
-        else {cs.OnTrackSelected += UpdateUI; cs.OnTrackDeselected += () => UpdateUI();}
         cs.ClearTrack();
     }
-    
+
+    private void OnEnable()
+    {
+        if (cs == null) {
+            Debug.LogError("No CurSelected found in scene");
+            return;
+        }
+
+        cs.OnTrackSelected += UpdateUI; cs.OnTrackDeselected += () => UpdateUI();
+    }
+
+    private void OnDisable() {
+        if (cs == null) return;
+
+        cs.OnTrackSelected -= UpdateUI; cs.OnTrackDeselected -= () => UpdateUI();
+    }
+
     private void Update()
     {
         // 우클릭시 deselect
@@ -43,7 +57,7 @@ public class SSController : MonoBehaviour
     {
         if (cs.HasTrack() is false)
         {
-             infoPanel.alpha = 0;
+            infoPanel.alpha = 0;
             previewAudioSource.Stop();
             
             return;
