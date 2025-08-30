@@ -218,6 +218,8 @@ namespace SeolMJ
                 OperationCount = Queue.Count + oldActiveScenes.Length;
                 OperationIndex = 0;
 
+                SceneTransition transition = null;
+
                 if (!param.DontSpawnPrefab)
                 {
                     if (Prefab == null)
@@ -243,6 +245,7 @@ namespace SeolMJ
                     {
                         GameObject obj = (await UnityEngine.Object.InstantiateAsync(Prefab))[0];
                         UnityEngine.Object.DontDestroyOnLoad(obj);
+                        transition = obj.GetComponent<SceneTransition>();
 #if UNITY_EDITOR
                         if (!inited)
                         {
@@ -250,6 +253,11 @@ namespace SeolMJ
                         }
 #endif
                     }
+                }
+
+                if (transition)
+                {
+                    await Awaitable.WaitForSecondsAsync(transition.Delay);
                 }
 
                 if (!IsBooted)
