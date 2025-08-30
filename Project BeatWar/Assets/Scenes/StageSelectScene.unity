@@ -2788,7 +2788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ef7837293c21e47819d88dc0dafc6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  track: {fileID: 11400000, guid: 89d491f97621d944c808108c59d53656, type: 2}
+  track: {fileID: 11400000, guid: b7637e732f98f5e48997f2e00a0f783e, type: 2}
   cam: {fileID: 1124989625}
   curSelected: {fileID: 11400000, guid: 30220c526bfef9e49b4ce3a76715aafc, type: 2}
 --- !u!50 &1189959008

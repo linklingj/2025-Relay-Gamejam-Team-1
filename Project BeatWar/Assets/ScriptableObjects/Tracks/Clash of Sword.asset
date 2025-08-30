@@ -15,7 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: Clash of sword
   <BPM>k__BackingField: 70
   <Delay>k__BackingField: 0
-  <Offset>k__BackingField: 0.8571429
+  <Offset>k__BackingField: 0.75
   <Chart>k__BackingField: 0102040801020408010204080102040805050000090900000f00000e0101010101020408010204080f0e0c080f000000000e00000e000700000f0f00090a0c0801020408010204080102040801020408
   <Clip>k__BackingField: {fileID: 8300000, guid: c476071ae5b7a3d498788a046ba3b10d, type: 3}
   <Lanes>k__BackingField: 60
